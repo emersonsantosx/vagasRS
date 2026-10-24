@@ -82,6 +82,7 @@ def carregar_dados():
 
     return dados
 
+
 def coletar():
     resposta = requests.get(
         FONTE_RSS,
@@ -89,7 +90,6 @@ def coletar():
         headers={"User-Agent": "VagasRS/1.0"},
     )
     resposta.raise_for_status()
-
     feed = feedparser.parse(resposta.content)
 
     if not feed.entries:
@@ -112,7 +112,12 @@ def coletar():
 
         texto = f"{titulo} {resumo}".lower()
 
-        if not any(p in texto for p in PALAVRAS_RS):
+        menciona_rs = any(
+            p != "rs" and p in texto
+            for p in PALAVRAS_RS
+        ) or bool(re.search(r"\bRS\b", f"{titulo} {resumo}"))
+
+        if not menciona_rs:
             continue
 
         categoria = identificar_categoria(texto)
@@ -135,6 +140,7 @@ def coletar():
         })
 
     return resultados
+    
 
 def main():
     dados = carregar_dados()
