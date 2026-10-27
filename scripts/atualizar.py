@@ -53,13 +53,35 @@ def gerar_id(url, titulo):
 def identificar_categoria(texto):
     texto = texto.lower()
 
-    if "concurso" in texto:
+    termos_excluidos = (
+        "miss universe", "concurso de beleza",
+        "concurso cultural", "concurso de fotografia",
+        "concurso literário", "concurso de redação",
+        "concurso de dança", "concurso de música",
+        "concurso gastronômico",
+    )
+
+    if any(termo in texto for termo in termos_excluidos):
+        return None
+
+    if any(termo in texto for termo in (
+        "concurso público", "concurso publico",
+        "edital de abertura", "concurso para prefeitura",
+        "concurso da prefeitura", "concurso tribunal",
+        "concurso polícia", "concurso policia",
+        "concurso polícia civil", "concurso policia civil",
+        "concurso militar",
+    )):
         return "concurso"
 
     if "processo seletivo" in texto or "seleção simplificada" in texto:
         return "processo_seletivo"
 
-    if "emprego" in texto or "vagas de emprego" in texto:
+    if any(termo in texto for termo in (
+        "vagas de emprego", "oportunidade de emprego",
+        "contratação", "contratacao",
+        "trabalhe conosco", "carteira assinada",
+    )):
         return "emprego"
 
     return None
