@@ -1,9 +1,7 @@
 
 import json
-import re
 from datetime import date, datetime, timezone
 from pathlib import Path
-from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -22,168 +20,150 @@ FONTES = [
     },
 ]
 
-CABECALHOS = {
-    "User-Agent": "VagasRS/1.0 (coletor de editais públicos)"
-}
+HEADERS = {"User-Agent": "Mozilla/5.0 VagasRS/1.0"}
 
 
-def extrair_data(texto):
-    datas = re.findall(
-        r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{4})\b",
-        texto,
-    )
-
-    if not datas:
-        return None
-
-    try:
-        dia, mes, ano = map(int, datas[-1])
-        return date(ano, mes, dia)
-    except ValueError:
-        return None
-
-
-def coletar_fonte(fonte):
+def coletar(fonte):
     resposta = requests.get(
-        fonte["url"],
-        headers=CABECALHOS,
-        timeout=30,
+        fonte["url"], headers=HEADERS, timeout=25
     )
     resposta.raise_for_status()
-
     soup = BeautifulSoup(resposta.text, "html.parser")
     hoje = datetime.now(timezone.utc).date()
     encontrados = {}
 
     for link in soup.find_all("a", href=True):
-        texto_link = link.get_text(" ", strip=True)
-        if not texto_link:
+        titulo = link.get_text(" ", strip=True)
+        if len(titulo) < 8:
             continue
 
-        contexto = link
-        texto_contexto = ""
+        contexto = link.parent
+        texto = ""
 
-        for _ in range(7):
+        for _ in range(5):
             if contexto is None:
                 break
-
-            texto_contexto = contexto.get_text(" ", strip=True)
-
-            if (
-                re.search(r"\d{1,2}[/-]\d{1,2}[/-]\d{4}", texto_contexto)
-                and re.search(
-                    r"inscriç(?:ão|ões)\s+abertas|período",
-                    texto_contexto,
-                    re.IGNORECASE,
-                )
-            ):
+            texto = contexto.get_text(" ", strip=True)
+            if len(texto) > len(titulo) + 20:
                 break
-
             contexto = contexto.parent
 
-        if not texto_contexto:
+        texto_lower = texto.lower()
+        palavras = (
+            "concurso", "processo seletivo",
+            "edital", "inscrições abertas"
+        )
+        if not any(p in texto_lower for p in palavras):
             continue
 
-        if not re.search(
-            r"inscriç(?:ão|ões)\s+abertas",
-            texto_contexto,
-            re.IGNORECASE,
-        ):
+        url = requests.compat.urljoin(fonte["url"], link["href"])
+        if not url.startswith("https://"):
             continue
 
-        prazo = extrair_data(texto_contexto)
-        if prazo is None or prazo < hoje:
+        # Só registra quando encontra um prazo explícito no contexto.
+        import re
+        datas = re.findall(
+            r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{4})\b", texto
+        )
+        prazo = None
+
+        for dia, mes, ano in reversed(datas):
+            try:
+                candidata = date(int(ano), int(mes), int(dia))
+                if candidata >= hoje:
+                    prazo = candidata
+                    break
+            except ValueError:
+                continue
+
+        if prazo is None:
             continue
 
-        url_edital = urljoin(fonte["url"], link["href"])
-
-        if not url_edital.startswith("https://"):
+        if url.rstrip("/") == fonte["url"].rstrip("/"):
             continue
 
-        if url_edital.rstrip("/") == fonte["url"].rstrip("/"):
-            continue
+        categoria = (
+            "concurso" if "concurso" in texto_lower
+            else "seletivo"
+        )
 
-        titulo = texto_link
-
-        for tag in contexto.find_all(
-            ["h1", "h2", "h3", "h4", "strong", "b"]
-        ):
-            candidato = tag.get_text(" ", strip=True)
-            if candidato and re.search(
-                r"edital|processo seletivo|concurso",
-                candidato,
-                re.IGNORECASE,
-            ):
-                titulo = candidato
-                break
-
-        titulo = re.sub(r"\s+", " ", titulo).strip()
-
-        if len(titulo) < 4:
-            continue
-
-        item = {
-            "id": url_edital,
+        encontrados[url] = {
+            "id": url,
             "titulo": titulo,
             "municipio": fonte["municipio"],
             "orgao": fonte["municipio"],
-            "categoria": "seletivo",
-            "url": url_edital,
-            "link": url_edital,
+            "categoria": categoria,
+            "url": url,
+            "link": url,
             "prazo_inscricao": prazo.isoformat(),
             "fonte_oficial": True,
             "fonte_nome": fonte["municipio"],
             "origem": fonte["url"],
         }
 
-        encontrados[url_edital] = item
-
-    print(
-        f'{fonte["municipio"]}: '
-        f'{len(encontrados)} oportunidade(s) encontrada(s)'
-    )
-
+    print(f'{fonte["municipio"]}: {len(encontrados)} resultado(s)')
     return list(encontrados.values())
 
 
 def main():
-    todas = []
+    anteriores = []
 
-    # Se uma fonte falhar, interrompe sem apagar os dados existentes.
-    for fonte in FONTES:
-        oportunidades = coletar_fonte(fonte)
-        todas.extend(oportunidades)
-
-    # Remove duplicatas e mantém apenas prazos válidos.
-    hoje = datetime.now(timezone.utc).date()
-    validas = {}
-
-    for item in todas:
+    if ARQUIVO.exists():
         try:
-            prazo = date.fromisoformat(item["prazo_inscricao"])
-        except (ValueError, KeyError, TypeError):
+            with ARQUIVO.open(encoding="utf-8") as f:
+                anteriores = json.load(f).get("publicacoes", [])
+        except (json.JSONDecodeError, OSError):
+            anteriores = []
+
+    coletadas = []
+
+    # Se uma fonte falhar, não substitui os dados atuais.
+    for fonte in FONTES:
+        coletadas.extend(coletar(fonte))
+
+    # Nunca apaga o arquivo por uma coleta vazia.
+    if not coletadas:
+        print("Nenhum resultado novo. Arquivo atual preservado.")
+        return
+
+    hoje = datetime.now(timezone.utc).date()
+    combinadas = {}
+
+    for item in anteriores + coletadas:
+        url = item.get("url") or item.get("link")
+        if not url or not url.startswith("https://"):
             continue
 
-        if prazo >= hoje and item.get("fonte_oficial") is True:
-            validas[item["url"]] = item
+        try:
+            prazo = date.fromisoformat(item.get("prazo_inscricao", ""))
+        except (ValueError, TypeError):
+            continue
+
+        if prazo < hoje:
+            continue
+
+        if item.get("fonte_oficial") is not True:
+            continue
+
+        item["url"] = url
+        item["link"] = url
+        combinadas[url] = item
 
     dados = {
         "atualizado_em": datetime.now(timezone.utc).isoformat(),
         "publicacoes": sorted(
-            validas.values(),
-            key=lambda item: item["prazo_inscricao"],
+            combinadas.values(),
+            key=lambda x: x["prazo_inscricao"],
         ),
     }
 
     temporario = ARQUIVO.with_suffix(".tmp")
-
-    with temporario.open("w", encoding="utf-8") as arquivo:
-        json.dump(dados, arquivo, ensure_ascii=False, indent=2)
-        arquivo.write("\n")
+    with temporario.open("w", encoding="utf-8") as f:
+        json.dump(dados, f, ensure_ascii=False, indent=2)
+        f.write("\n")
 
     temporario.replace(ARQUIVO)
-
-    print(f"Total de oportunidades válidas: {len(validas)}")
+    print(f"Total salvo: {len(combinadas)}")
 
 
 if __name__ == "__main__":
