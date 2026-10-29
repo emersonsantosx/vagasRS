@@ -5,22 +5,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#12372a">
-  <meta name="description" content="Encontre concursos públicos e processos seletivos no Rio Grande do Sul.">
+  <meta name="description" content="Encontre concursos públicos, processos seletivos e vagas de emprego no Rio Grande do Sul.">
   <title>Vagas RS | Oportunidades no Rio Grande do Sul</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:#f5f7f4;
-      --paper:#fff;
-      --ink:#17231d;
-      --muted:#68766d;
-      --line:#e2e9e2;
-      --green:#176b45;
-      --green-dark:#12372a;
-      --mint:#e5f3e9;
-      --shadow:0 8px 28px rgba(20,45,30,.06);
+      --bg:#f5f7f4;--paper:#fff;--ink:#17231d;--muted:#68766d;
+      --line:#e2e9e2;--green:#176b45;--green-dark:#12372a;
+      --mint:#e5f3e9;--shadow:0 8px 28px rgba(20,45,30,.06);
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -49,7 +43,7 @@
     .section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:4px 0 15px}
     h2{font:800 21px Manrope,sans-serif;letter-spacing:-.035em;margin:0}
     .sub{font-size:13px;color:var(--muted);margin:4px 0 0}
-    .sort{border:1px solid var(--line);background:white;border-radius:10px;padding:9px 10px;color:#435047;font:600 12px "DM Sans",sans-serif;max-width:160px}
+    .sort{border:1px solid var(--line);background:white;border-radius:10px;padding:9px 10px;color:#435047;font:600 12px "DM Sans",sans-serif;max-width:180px}
     .results{display:grid;gap:12px}
     .card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;display:flex;flex-direction:column;gap:12px;transition:transform .15s,box-shadow .15s}
     .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -101,9 +95,10 @@
         <button id="clearSearch" class="clear hidden" type="button">Limpar</button>
       </div>
       <div class="filters" role="group" aria-label="Filtrar oportunidades">
-        <button class="filter active" data-filter="todos" type="button">Todas <small id="count-todos">0</small></button>
-        <button class="filter" data-filter="concurso" type="button">Concursos <small id="count-concurso">0</small></button>
-        <button class="filter" data-filter="seletivo" type="button">Processos seletivos <small id="count-seletivo">0</small></button>
+        <button class="filter active" data-filter="todos" type="button" aria-pressed="true">Todas <small id="count-todos">0</small></button>
+        <button class="filter" data-filter="concurso" type="button" aria-pressed="false">Concursos <small id="count-concurso">0</small></button>
+        <button class="filter" data-filter="seletivo" type="button" aria-pressed="false">Processos seletivos <small id="count-seletivo">0</small></button>
+        <button class="filter" data-filter="emprego" type="button" aria-pressed="false">Empregos <small id="count-emprego">0</small></button>
       </div>
     </section>
   </div>
@@ -118,6 +113,7 @@
         <option value="default">Ordem original</option>
         <option value="az">Título: A a Z</option>
         <option value="city">Município: A a Z</option>
+        <option value="deadline">Prazo mais próximo</option>
       </select>
     </div>
 
@@ -129,7 +125,7 @@
     </div>
     <div id="dataNotice" class="notice hidden">
       <strong>Sobre os resultados</strong>
-      <p>Confira sempre o site da instituição responsável para confirmar prazos, requisitos e informações do edital.</p>
+      <p>Confira sempre o site da instituição responsável para confirmar prazos, requisitos e informações do edital. O Vagas RS não substitui a publicação oficial.</p>
     </div>
 
     <section class="portals">
@@ -157,6 +153,283 @@
       const clearEl = $('clearSearch');
       const sortEl = $('sortSelect');
       const filterButtons = [...document.querySelectorAll('[data-filter]')];
+
+      let items = [];
+      let activeFilter = 'todos';
+      let searchTerm = '';
+
+      const normalize = value => String(value ?? '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+
+      const safe = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+        '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+      }[ch]));
+
+      const getTitle = item => String(
+        item.titulo_publicacao || item.titulo || item.nome || item.title || ''
+      ).trim();
+
+      const getCity = item => String(
+        item.municipio || item.cidade || item.local || item.localidade || ''
+      ).trim();
+
+      const getDeadline = item => {
+        const raw = item.prazo_inscricao || item.data_limite ||
+          item.data_fim || item.data_encerramento || item.fim_inscricao || '';
+
+        if (!raw) return '';
+
+        let match = String(raw).match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (match) return `${match[1]}-${match[2]}-${match[3]}`;
+
+        match = String(raw).match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        if (match) return `${match[3]}-${match[2].padStart(2,'0')}-${match[1].padStart(2,'0')}`;
+
+        return '';
+      };
+
+      const todayISO = () => {
+        const now = new Date();
+        return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      };
+
+      const isExpired = item => {
+        const deadline = getDeadline(item);
+        return Boolean(deadline && deadline < todayISO());
+      };
+
+      const getLink = item => {
+        const links = Array.isArray(item.links) ? item.links : [];
+        const found = links.find(link => {
+          const url = typeof link === 'string' ? link : link?.url;
+          return /^https?:\/\//i.test(url || '');
+        });
+
+        const candidate = found
+          ? (typeof found === 'string' ? found : found.url)
+          : (item.url || item.link || item.link_edital || '');
+
+        try {
+          const parsed = new URL(candidate, window.location.href);
+          return ['http:', 'https:'].includes(parsed.protocol) ? parsed.href : '';
+        } catch {
+          return '';
+        }
+      };
+
+      const categoryOf = item => {
+        const explicit = normalize(
+          item.categoria || item.tipo || item.tipo_oportunidade || ''
+        );
+
+        if (/\b(emprego|empregos|vaga de emprego|vagas de emprego|trabalho)\b/.test(explicit))
+          return 'emprego';
+
+        if (/\b(concurso|concursos|concurso publico)\b/.test(explicit))
+          return 'concurso';
+
+        if (/\b(seletivo|processo seletivo|processos seletivos|processo-seletivo|pss|selecao simplificada)\b/.test(explicit))
+          return 'seletivo';
+
+        const title = normalize(getTitle(item));
+
+        if (/\b(emprego|empregos|vaga de emprego|vagas de emprego)\b/.test(title))
+          return 'emprego';
+
+        if (/\b(pss|processo seletivo|selecao simplificada|seletivo simplificado)\b/.test(title))
+          return 'seletivo';
+
+        if (/\b(concurso publico|concurso|edital de abertura|edital de concurso)\b/.test(title))
+          return 'concurso';
+
+        return 'outro';
+      };
+
+      const sourceName = item =>
+        item.fonte_nome || item.fonte || item.origem || item.orgao || 'Fonte externa';
+
+      function updateCounts() {
+        $('count-todos').textContent = items.length;
+        $('count-concurso').textContent =
+          items.filter(item => categoryOf(item) === 'concurso').length;
+        $('count-seletivo').textContent =
+          items.filter(item => categoryOf(item) === 'seletivo').length;
+        $('count-emprego').textContent =
+          items.filter(item => categoryOf(item) === 'emprego').length;
+      }
+
+      function createCard(item) {
+        const title = getTitle(item);
+        const city = getCity(item) || 'Rio Grande do Sul';
+        const category = categoryOf(item);
+        const labels = {
+          concurso: 'Concurso público',
+          seletivo: 'Processo seletivo',
+          emprego: 'Vaga de emprego',
+          outro: 'Publicação'
+        };
+
+        const url = getLink(item);
+        const deadline = getDeadline(item);
+        const deadlineText = deadline
+          ? `Inscrições até ${new Date(`${deadline}T12:00:00`).toLocaleDateString('pt-BR')}`
+          : '';
+
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="tag">${safe(labels[category])}</span>
+            <span class="location">⌖ ${safe(city)}</span>
+          </div>
+          <h3>${safe(title)}</h3>
+          ${deadlineText ? `<span class="source">${safe(deadlineText)}</span>` : ''}
+          <div class="card-bottom">
+            <span class="source">${safe(String(sourceName(item)).replace(/^https?:\/\//, ''))}</span>
+            <a class="open-link" href="${safe(url)}" target="_blank" rel="noopener noreferrer">Ver oportunidade ↗</a>
+          </div>`;
+
+        return card;
+      }
+
+      function render() {
+        resultsEl.innerHTML = '';
+
+        let visible = items.filter(item => {
+          const category = categoryOf(item);
+          const searchable = normalize([
+            getTitle(item), getCity(item), item.orgao || '', sourceName(item)
+          ].join(' '));
+
+          const matchesCategory =
+            activeFilter === 'todos' || category === activeFilter;
+
+          return matchesCategory && (!searchTerm || searchable.includes(searchTerm));
+        });
+
+        if (sortEl.value === 'az') {
+          visible.sort((a, b) =>
+            getTitle(a).localeCompare(getTitle(b), 'pt-BR')
+          );
+        }
+
+        if (sortEl.value === 'city') {
+          visible.sort((a, b) =>
+            getCity(a).localeCompare(getCity(b), 'pt-BR')
+          );
+        }
+
+        if (sortEl.value === 'deadline') {
+          visible.sort((a, b) =>
+            (getDeadline(a) || '9999-12-31')
+              .localeCompare(getDeadline(b) || '9999-12-31')
+          );
+        }
+
+        visible.forEach(item => resultsEl.appendChild(createCard(item)));
+
+        resultsEl.classList.toggle('hidden', visible.length === 0);
+        noResultsEl.classList.toggle('hidden', visible.length !== 0);
+
+        $('resultsSubtitle').textContent =
+          `${visible.length} ${visible.length === 1 ? 'resultado encontrado' : 'resultados encontrados'}`;
+
+        $('resultsTitle').textContent = ({
+          todos: 'Oportunidades recentes',
+          concurso: 'Concursos públicos',
+          seletivo: 'Processos seletivos',
+          emprego: 'Vagas de emprego'
+        })[activeFilter] || 'Oportunidades recentes';
+
+        filterButtons.forEach(button => {
+          const selected = button.dataset.filter === activeFilter;
+          button.classList.toggle('active', selected);
+          button.setAttribute('aria-pressed', String(selected));
+        });
+      }
+
+      async function load() {
+        try {
+          const response = await fetch('./data/oportunidades.json', {
+            cache: 'no-store'
+          });
+
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+          const data = await response.json();
+          const publications = Array.isArray(data) ? data : data.publicacoes;
+
+          if (!Array.isArray(publications)) {
+            throw new Error('Formato inválido: publicacoes não é uma lista.');
+          }
+
+          const seen = new Set();
+
+          items = publications.filter(item => {
+            if (!item || typeof item !== 'object') return false;
+
+            const title = getTitle(item);
+            const url = getLink(item);
+
+            if (!title || !url) return false;
+            if (isExpired(item)) return false;
+
+            const key = normalize(title) + '|' + normalize(getCity(item)) + '|' + url;
+            if (seen.has(key)) return false;
+
+            seen.add(key);
+            return true;
+          });
+
+          statusEl.classList.add('hidden');
+          $('dataNotice').classList.toggle('hidden', items.length === 0);
+
+          updateCounts();
+          render();
+
+          if (items.length === 0) {
+            statusEl.classList.remove('hidden');
+            statusEl.innerHTML =
+              '<h3>Nenhuma oportunidade encontrada</h3><p>A base ainda não contém publicações com título e link válidos. A coleta automática precisa fornecer dados compatíveis.</p>';
+
+            resultsEl.classList.add('hidden');
+            noResultsEl.classList.add('hidden');
+            $('resultsSubtitle').textContent = 'Nenhuma oportunidade disponível';
+          }
+        } catch (error) {
+          console.error('Erro ao carregar oportunidades:', error);
+          statusEl.classList.remove('hidden');
+          statusEl.innerHTML =
+            '<h3 class="error">Não foi possível carregar os dados</h3><p>Confira se data/oportunidades.json existe e contém JSON válido.</p>';
+
+          $('resultsSubtitle').textContent = 'Falha ao carregar os dados';
+          resultsEl.classList.add('hidden');
+          noResultsEl.classList.add('hidden');
+        }
+      }
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          activeFilter = button.dataset.filter;
+          render();
+        });
+      });
+
+      searchEl.addEventListener('input', () => {
+        searchTerm = normalize(searchEl.value);
+        clearEl.classList.toggle('hidden', !searchEl.value);
+        render();
+      });
+
+      clearEl.addEventListener('click', () => {
+        searchEl.value = '';
+        searchTerm = '';
+        clearEl.classList.add('hidden');
+        searchEl.focurButtons = [...document.querySelectorAll('[data-filter]')];
 
       let items = [];
       let activeFilter = 'todos';
