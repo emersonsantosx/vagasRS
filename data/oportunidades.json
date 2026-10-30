@@ -1,71 +1,6 @@
 {
-  "atualizado_em": "2026-10-29T18:11:10.443667+00:00",
+  "atualizado_em": "2026-10-30T04:51:51.346219+00:00",
   "publicacoes": [
-    {
-      "id": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/10/public_HBCS_publicacao_Portarias_2026_10_20261028155038019.pdf",
-      "titulo": "Portaria 323/2026",
-      "municipio": "Passo Fundo",
-      "orgao": "Passo Fundo",
-      "categoria": "concurso",
-      "url": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/10/public_HBCS_publicacao_Portarias_2026_10_20261028155038019.pdf",
-      "link": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/10/public_HBCS_publicacao_Portarias_2026_10_20261028155038019.pdf",
-      "prazo_inscricao": "2026-10-29",
-      "fonte_oficial": true,
-      "fonte_nome": "Passo Fundo",
-      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
-    },
-    {
-      "id": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
-      "titulo": "Ver todos os editais.",
-      "municipio": "Passo Fundo",
-      "orgao": "Passo Fundo",
-      "categoria": "concurso",
-      "url": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
-      "link": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
-      "prazo_inscricao": "2026-10-29",
-      "fonte_oficial": true,
-      "fonte_nome": "Passo Fundo",
-      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
-    },
-    {
-      "id": "https://inqc.org.br/index.php?tela=32",
-      "titulo": "www.inqc.org.br",
-      "municipio": "Passo Fundo",
-      "orgao": "Passo Fundo",
-      "categoria": "concurso",
-      "url": "https://inqc.org.br/index.php?tela=32",
-      "link": "https://inqc.org.br/index.php?tela=32",
-      "prazo_inscricao": "2026-10-29",
-      "fonte_oficial": true,
-      "fonte_nome": "Passo Fundo",
-      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
-    },
-    {
-      "id": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
-      "titulo": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
-      "municipio": "Passo Fundo",
-      "orgao": "Passo Fundo",
-      "categoria": "concurso",
-      "url": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
-      "link": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
-      "prazo_inscricao": "2026-10-29",
-      "fonte_oficial": true,
-      "fonte_nome": "Passo Fundo",
-      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
-    },
-    {
-      "id": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
-      "titulo": "Acesse Aqui",
-      "municipio": "Passo Fundo",
-      "orgao": "Passo Fundo",
-      "categoria": "concurso",
-      "url": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
-      "link": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
-      "prazo_inscricao": "2026-10-29",
-      "fonte_oficial": true,
-      "fonte_nome": "Passo Fundo",
-      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
-    },
     {
       "id": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
       "titulo": "Pular para o conteúdo",
@@ -156,6 +91,58 @@
       "fonte_oficial": true,
       "fonte_nome": "Igrejinha",
       "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
+    },
+    {
+      "id": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
+      "titulo": "Ver todos os editais.",
+      "municipio": "Passo Fundo",
+      "orgao": "Passo Fundo",
+      "categoria": "concurso",
+      "url": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
+      "link": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
+      "prazo_inscricao": "2026-11-10",
+      "fonte_oficial": true,
+      "fonte_nome": "Passo Fundo",
+      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
+    },
+    {
+      "id": "https://inqc.org.br/index.php?tela=32",
+      "titulo": "www.inqc.org.br",
+      "municipio": "Passo Fundo",
+      "orgao": "Passo Fundo",
+      "categoria": "concurso",
+      "url": "https://inqc.org.br/index.php?tela=32",
+      "link": "https://inqc.org.br/index.php?tela=32",
+      "prazo_inscricao": "2026-11-10",
+      "fonte_oficial": true,
+      "fonte_nome": "Passo Fundo",
+      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
+    },
+    {
+      "id": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
+      "titulo": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
+      "municipio": "Passo Fundo",
+      "orgao": "Passo Fundo",
+      "categoria": "concurso",
+      "url": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
+      "link": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
+      "prazo_inscricao": "2026-11-10",
+      "fonte_oficial": true,
+      "fonte_nome": "Passo Fundo",
+      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
+    },
+    {
+      "id": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
+      "titulo": "Acesse Aqui",
+      "municipio": "Passo Fundo",
+      "orgao": "Passo Fundo",
+      "categoria": "concurso",
+      "url": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
+      "link": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
+      "prazo_inscricao": "2026-11-10",
+      "fonte_oficial": true,
+      "fonte_nome": "Passo Fundo",
+      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
     }
   ]
 }
