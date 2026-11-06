@@ -1,19 +1,6 @@
 {
-  "atualizado_em": "2026-11-05T19:39:59.416897+00:00",
+  "atualizado_em": "2026-11-06T05:38:39.142135+00:00",
   "publicacoes": [
-    {
-      "id": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
-      "titulo": "Pular para o conteúdo",
-      "municipio": "Igrejinha",
-      "orgao": "Igrejinha",
-      "categoria": "concurso",
-      "url": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
-      "link": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
-      "prazo_inscricao": "2026-11-05",
-      "fonte_oficial": true,
-      "fonte_nome": "Igrejinha",
-      "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
-    },
     {
       "id": "https://www.igrejinha.rs.gov.br/seletivo/ID92-01%20-%20Edital%20087_2026%20-%20Abertura%20das%20inscri%C3%A7%C3%B5es%20-%20Auxiliar%20de%20Educa%C3%A7%C3%A3o.docx.pdf",
       "titulo": "ID92-01 - Edital 087_2026 - Abertura das inscrições - Auxiliar de Educação.docx.pdf Abrir",
@@ -35,6 +22,19 @@
       "categoria": "seletivo",
       "url": "https://www.igrejinha.rs.gov.br/seletivo/ID91-01%20-%20Edital%20086_2026%20-%20EDITAL%20DE%20ABERTURA%20-%20EDUCADOR%20MULTIMEIOS.docx.pdf",
       "link": "https://www.igrejinha.rs.gov.br/seletivo/ID91-01%20-%20Edital%20086_2026%20-%20EDITAL%20DE%20ABERTURA%20-%20EDUCADOR%20MULTIMEIOS.docx.pdf",
+      "prazo_inscricao": "2026-11-06",
+      "fonte_oficial": true,
+      "fonte_nome": "Igrejinha",
+      "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
+    },
+    {
+      "id": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
+      "titulo": "Pular para o conteúdo",
+      "municipio": "Igrejinha",
+      "orgao": "Igrejinha",
+      "categoria": "concurso",
+      "url": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
+      "link": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
       "prazo_inscricao": "2026-11-06",
       "fonte_oficial": true,
       "fonte_nome": "Igrejinha",
