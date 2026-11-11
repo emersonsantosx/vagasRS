@@ -1,58 +1,6 @@
 {
-  "atualizado_em": "2026-11-10T19:27:27.756714+00:00",
+  "atualizado_em": "2026-11-11T05:13:07.698617+00:00",
   "publicacoes": [
-    {
-      "id": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/10/concPublico2026-hospital-edita08-23102026.pdf",
-      "titulo": "Edital 08/2026",
-      "municipio": "Passo Fundo",
-      "orgao": "Passo Fundo",
-      "categoria": "seletivo",
-      "url": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/10/concPublico2026-hospital-edita08-23102026.pdf",
-      "link": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/10/concPublico2026-hospital-edita08-23102026.pdf",
-      "prazo_inscricao": "2026-11-10",
-      "fonte_oficial": true,
-      "fonte_nome": "Passo Fundo",
-      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
-    },
-    {
-      "id": "https://www.igrejinha.rs.gov.br/seletivo/ID95-01%20Edital%20091_2026%20-%20EDITAL%20DE%20ABERTURA%20-%20Auxiliar%20de%20Servi%C3%A7os%20Gerais.docx%20%281%29.pdf",
-      "titulo": "ID95-01 Edital 091_2026 - EDITAL DE ABERTURA - Auxiliar de Serviços Gerais.docx (1).pdf Abrir",
-      "municipio": "Igrejinha",
-      "orgao": "Igrejinha",
-      "categoria": "seletivo",
-      "url": "https://www.igrejinha.rs.gov.br/seletivo/ID95-01%20Edital%20091_2026%20-%20EDITAL%20DE%20ABERTURA%20-%20Auxiliar%20de%20Servi%C3%A7os%20Gerais.docx%20%281%29.pdf",
-      "link": "https://www.igrejinha.rs.gov.br/seletivo/ID95-01%20Edital%20091_2026%20-%20EDITAL%20DE%20ABERTURA%20-%20Auxiliar%20de%20Servi%C3%A7os%20Gerais.docx%20%281%29.pdf",
-      "prazo_inscricao": "2026-11-10",
-      "fonte_oficial": true,
-      "fonte_nome": "Igrejinha",
-      "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
-    },
-    {
-      "id": "https://www.igrejinha.rs.gov.br/seletivo/ID94-01%20Edital%20090_2026%20-%20Abertura%20Auxiliar%20de%20Farm%C3%A1cia%20de%20Manipula%C3%A7%C3%A3o.docx%20%281%29.pdf",
-      "titulo": "ID94-01 Edital 090_2026 - Abertura Auxiliar de Farmácia de Manipulação.docx (1).pdf Abrir",
-      "municipio": "Igrejinha",
-      "orgao": "Igrejinha",
-      "categoria": "seletivo",
-      "url": "https://www.igrejinha.rs.gov.br/seletivo/ID94-01%20Edital%20090_2026%20-%20Abertura%20Auxiliar%20de%20Farm%C3%A1cia%20de%20Manipula%C3%A7%C3%A3o.docx%20%281%29.pdf",
-      "link": "https://www.igrejinha.rs.gov.br/seletivo/ID94-01%20Edital%20090_2026%20-%20Abertura%20Auxiliar%20de%20Farm%C3%A1cia%20de%20Manipula%C3%A7%C3%A3o.docx%20%281%29.pdf",
-      "prazo_inscricao": "2026-11-10",
-      "fonte_oficial": true,
-      "fonte_nome": "Igrejinha",
-      "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
-    },
-    {
-      "id": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
-      "titulo": "Pular para o conteúdo",
-      "municipio": "Igrejinha",
-      "orgao": "Igrejinha",
-      "categoria": "concurso",
-      "url": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
-      "link": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
-      "prazo_inscricao": "2026-11-10",
-      "fonte_oficial": true,
-      "fonte_nome": "Igrejinha",
-      "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
-    },
     {
       "id": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
       "titulo": "Ver todos os editais.",
