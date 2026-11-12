@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-12T06:17:13.080645+00:00",
+  "atualizado_em": "2026-11-12T19:40:21.492732+00:00",
   "publicacoes": [
     {
       "id": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
@@ -9,7 +9,7 @@
       "categoria": "concurso",
       "url": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
       "link": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
-      "prazo_inscricao": "2026-11-19",
+      "prazo_inscricao": "2026-11-12",
       "fonte_oficial": true,
       "fonte_nome": "Passo Fundo",
       "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
@@ -22,7 +22,7 @@
       "categoria": "concurso",
       "url": "https://inqc.org.br/index.php?tela=32",
       "link": "https://inqc.org.br/index.php?tela=32",
-      "prazo_inscricao": "2026-11-19",
+      "prazo_inscricao": "2026-11-12",
       "fonte_oficial": true,
       "fonte_nome": "Passo Fundo",
       "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
@@ -35,7 +35,7 @@
       "categoria": "concurso",
       "url": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
       "link": "https://www.pmpf.rs.gov.br/transparencia/editaisleipaulogustavo/",
-      "prazo_inscricao": "2026-11-19",
+      "prazo_inscricao": "2026-11-12",
       "fonte_oficial": true,
       "fonte_nome": "Passo Fundo",
       "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
@@ -48,7 +48,46 @@
       "categoria": "concurso",
       "url": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
       "link": "https://www.pmpf.rs.gov.br/secretaria-de-administracao/servicos/postergacao-de-vaga/",
-      "prazo_inscricao": "2026-11-19",
+      "prazo_inscricao": "2026-11-12",
+      "fonte_oficial": true,
+      "fonte_nome": "Passo Fundo",
+      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
+    },
+    {
+      "id": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163107811.pdf",
+      "titulo": "Portaria 346/2026",
+      "municipio": "Passo Fundo",
+      "orgao": "Passo Fundo",
+      "categoria": "seletivo",
+      "url": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163107811.pdf",
+      "link": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163107811.pdf",
+      "prazo_inscricao": "2026-11-12",
+      "fonte_oficial": true,
+      "fonte_nome": "Passo Fundo",
+      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
+    },
+    {
+      "id": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163145263.pdf",
+      "titulo": "Portaria 347/2026",
+      "municipio": "Passo Fundo",
+      "orgao": "Passo Fundo",
+      "categoria": "seletivo",
+      "url": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163145263.pdf",
+      "link": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163145263.pdf",
+      "prazo_inscricao": "2026-11-12",
+      "fonte_oficial": true,
+      "fonte_nome": "Passo Fundo",
+      "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
+    },
+    {
+      "id": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163221532.pdf",
+      "titulo": "Portaria 348/2026",
+      "municipio": "Passo Fundo",
+      "orgao": "Passo Fundo",
+      "categoria": "seletivo",
+      "url": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163221532.pdf",
+      "link": "https://www.pmpf.rs.gov.br/transparencia/wp-content/uploads/sites/31/2026/11/public_HBCS_publicacao_Portarias_2026_11_20261111163221532.pdf",
+      "prazo_inscricao": "2026-11-12",
       "fonte_oficial": true,
       "fonte_nome": "Passo Fundo",
       "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
