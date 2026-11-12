@@ -1,5 +1,5 @@
 {
-  "atualizado_em": "2026-11-11T05:13:07.698617+00:00",
+  "atualizado_em": "2026-11-12T06:17:13.080645+00:00",
   "publicacoes": [
     {
       "id": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/ano-2026/",
@@ -65,6 +65,32 @@
       "fonte_oficial": true,
       "fonte_nome": "Passo Fundo",
       "origem": "https://www.pmpf.rs.gov.br/transparencia/concurso-publico/"
+    },
+    {
+      "id": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
+      "titulo": "Pular para o conteúdo",
+      "municipio": "Igrejinha",
+      "orgao": "Igrejinha",
+      "categoria": "concurso",
+      "url": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
+      "link": "https://www.igrejinha.rs.gov.br/seletivos.php#main-content",
+      "prazo_inscricao": "2026-11-26",
+      "fonte_oficial": true,
+      "fonte_nome": "Igrejinha",
+      "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
+    },
+    {
+      "id": "https://www.igrejinha.rs.gov.br/seletivo/ID96-01%20-%20Edital%20093_2026%20-%20Abertura%20de%20Inscri%C3%A7%C3%B5es%20Professor%20de%20AEE%20%28Atendimento%20Educacional%20Especializado%29.docx%20%283%29.pdf",
+      "titulo": "ID96-01 - Edital 093_2026 - Abertura de Inscrições Professor de AEE (Atendimento Educacional Especializado).docx (3).pdf Abrir",
+      "municipio": "Igrejinha",
+      "orgao": "Igrejinha",
+      "categoria": "seletivo",
+      "url": "https://www.igrejinha.rs.gov.br/seletivo/ID96-01%20-%20Edital%20093_2026%20-%20Abertura%20de%20Inscri%C3%A7%C3%B5es%20Professor%20de%20AEE%20%28Atendimento%20Educacional%20Especializado%29.docx%20%283%29.pdf",
+      "link": "https://www.igrejinha.rs.gov.br/seletivo/ID96-01%20-%20Edital%20093_2026%20-%20Abertura%20de%20Inscri%C3%A7%C3%B5es%20Professor%20de%20AEE%20%28Atendimento%20Educacional%20Especializado%29.docx%20%283%29.pdf",
+      "prazo_inscricao": "2026-11-26",
+      "fonte_oficial": true,
+      "fonte_nome": "Igrejinha",
+      "origem": "https://www.igrejinha.rs.gov.br/seletivos.php"
     }
   ]
 }
